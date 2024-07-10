@@ -17,7 +17,7 @@ const Login = () => {
   const login = async () => {
     console.log("Login function executed", formData);
     let responseData;
-    await fetch('https://rh-ecommerce-backend.onrender.com/login', {
+    await fetch('https://roadhouse-backend.onrender.com/login', {
       method: 'POST',
       headers: {
         Accept: 'application/formData',
@@ -38,7 +38,7 @@ const Login = () => {
   const signup = async () => {
     console.log("Signup function executed", formData);
     let responseData;
-    await fetch('https://rh-ecommerce-backend.onrender.com/signup', {
+    await fetch('https://roadhouse-backend.onrender.com/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/formData',

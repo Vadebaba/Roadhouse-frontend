@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from 'react';
 
 
@@ -18,10 +19,10 @@ const ShopContextProvider = (props) => {
     const [all_products, setAll_products] = useState([]);
 
     useEffect(() => {
-        fetch("https://rh-ecommerce-backend.onrender.com/allproducts").then((response) =>
+        fetch("https://roadhouse-backend.onrender.com/allproducts").then((response) =>
             response.json()).then((data) => setAll_products(data));
             if(localStorage.getItem('auth-token')){
-                fetch("https://rh-ecommerce-backend.onrender.com/getcart",{
+                fetch("https://roadhouse-backend.onrender.com/getcart",{
                     method:'POST',
                     headers:{
                         Accept:'application/form-data',
@@ -38,7 +39,7 @@ const ShopContextProvider = (props) => {
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         if(localStorage.getItem('auth-token')){
-            fetch("https://rh-ecommerce-backend.onrender.com/addtocart", {
+            fetch("https://roadhouse-backend.onrender.com/addtocart", {
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -55,7 +56,7 @@ const ShopContextProvider = (props) => {
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if(localStorage.getItem('auth-token')){
-            fetch("https://rh-ecommerce-backend.onrender.com/removefromcart", {
+            fetch("https://roadhouse-backend.onrender.com/removefromcart", {
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -73,8 +74,8 @@ const ShopContextProvider = (props) => {
         let totalAmount = 0;
         for (const item in cartItems) {
             if (cartItems[item] > 0) {
-                let itemInfo = all_products.find((product) => product.id === Number
-                    (item));
+                let itemInfo = all_products.find((product) =>
+                     product.id === Number(item));
                 totalAmount += itemInfo.new_price * cartItems[item];
             }
         }
@@ -97,6 +98,7 @@ const ShopContextProvider = (props) => {
     };
     return (
         <ShopContext.Provider value={contextValue}>
+            
             {props.children}
         </ShopContext.Provider>
     );
